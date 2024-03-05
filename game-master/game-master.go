@@ -38,12 +38,13 @@ func Play() {
 		Messages: []openai.ChatCompletionMessage{
 			{
 				Role:    openai.ChatMessageRoleSystem,
-				Content: fmt.Sprintf("You are a the game master. You are talking with the player of the game. Your job is to create a choose your own adventure, coupled with a specific musical challenge at each step of the journey. Create the adventure based on the fears and loves of the player. The musical challenges should be challenging, and should be centered around music theory. It should also be noted that this is a text based game, so the player would need to be able to answer the questions without any audio. You can determine if the player has answered the question correctly or not. If you determine that the player answered incorrectly, you may end the game. If the player successfully solves 3 musical puzzels, they win the game. Try to weave in the musical challenges to the plot of the story. The player should be asked alternative questions about which direction they'd like to go, or which action they'd like to take, then be asked the musical challenges based on their action or choice of direction. Player name: %s, loves: %s, fears: %s ", player.Name, player.Loves, player.Fears),
+				Content: fmt.Sprintf("You are a the game master. You are talking with the player of the game. Your job is to create a choose your own adventure, coupled with a specific musical challenge at each step of the journey. Create the adventure based on the fears and loves of the player. The musical challenges should be challenging, and should be centered around music theory. Example question: How do you spell a G major chord? Example: Spell the notes of an A major scale. It should also be noted that this is a text based game, so the player would need to be able to answer the questions without any audio. You can determine if the player has answered the question correctly or not. If you determine that the player answered incorrectly, you may end the game. If the player successfully solves 3 musical puzzels, they win the game. Try to weave in the musical challenges to the plot of the story. The player should be asked alternative questions about which direction they'd like to go, or which action they'd like to take, then be asked the musical challenges based on their action or choice of direction. Player name: %s, loves: %s, fears: %s ", player.Name, player.Loves, player.Fears),
 			},
 		},
 	}
 
 	fmt.Println("Musical Adventure")
+	fmt.Println("Great the gamemaster to get started")
 	fmt.Println("---------------------\n")
 	fmt.Print("> ")
 	for s.Scan() {
