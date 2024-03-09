@@ -15,7 +15,9 @@ type AiFunc struct {
 	Prompt string `json:"prompt"`
 }
 
-type FunkFactory struct{}
+type FunkFactory struct {
+	funks map[string]Funker
+}
 
 func (ff FunkFactory) endGame(ctx context.Context, client *openai.Client, prompt string) {
 	fmt.Println("Inside endGame...")

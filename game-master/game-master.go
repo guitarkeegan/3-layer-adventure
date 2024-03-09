@@ -107,9 +107,11 @@ func Play() {
 		fmt.Printf("%s\n\n", resp.Choices[0].Message.Content)
 
 		fmt.Println(resp.Choices[0].FinishReason)
+		// if state == ending then call the function
 
 		if resp.Choices[0].FinishReason == openai.FinishReasonToolCalls {
 			fmt.Println("Calling function!")
+			// ToolCalls[0] related to my Tools?
 			name := fmt.Sprint(resp.Choices[0].Message.ToolCalls[0].Function.Name)
 
 			var args AiFunc
@@ -125,7 +127,6 @@ func Play() {
 		}
 		req.Messages = append(req.Messages, resp.Choices[0].Message)
 		fmt.Print("> ")
-
 	}
 }
 
