@@ -8,12 +8,15 @@ import (
 )
 
 const (
-	Chatting = "chatting"
-	Ending   = "ending"
+	Loading  GameState = "loading"
+	Chatting GameState = "chatting"
+	Ending   GameState = "ending"
 )
 
+type GameState string
+
 type GameAI struct {
-	state string
+	state GameState
 }
 
 func New() *GameAI {
@@ -22,16 +25,21 @@ func New() *GameAI {
 	}
 }
 
-func (gai *GameAI) State() string {
+func (gai *GameAI) State() GameState {
 	return gai.state
 }
 
 func (gai *GameAI) Chat(ctx context.Context, c *openai.Client) (string, error) {
-	// TODO: check state
-	if gai.state == Ending {
+
+	if gai.state != Chatting {
 		return "", errors.New("Cannot call Chat while in Ending state")
 
 	}
 	// TODO: send message to openai
+
 	return "", nil
+}
+
+func (gai *GameAI) CallFunction(ctx context.Context, c *openai.Client) {
+	// TODO: This will end with state changing to 'ending'
 }
