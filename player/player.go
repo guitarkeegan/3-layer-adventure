@@ -3,7 +3,6 @@ package player
 
 import (
 	"bufio"
-	"errors"
 	"fmt"
 	"log"
 )
@@ -17,9 +16,9 @@ const (
 
 // PlayerInfo holds the player information
 type PlayerInfo struct {
-	name  string
-	loves string
-	fears string
+	Name  string
+	Loves string
+	Fears string
 }
 
 // Make a new player and return it
@@ -36,7 +35,9 @@ func Make(s *bufio.Scanner) PlayerInfo {
 			log.Fatal("error shouldn't happen on getPlayerInfo")
 		}
 
-		name, loves, fears = ans[0], ans[1], ans[2]
+		name = ans[0]
+		loves = ans[1]
+		fears = ans[2]
 
 		// check if too long
 		if len(name) > PlayerFieldMaxCharacters || len(loves) > PlayerFieldMaxCharacters || len(fears) > PlayerFieldMaxCharacters {
@@ -53,9 +54,9 @@ func Make(s *bufio.Scanner) PlayerInfo {
 	}
 
 	return PlayerInfo{
-		name:  name,
-		loves: loves,
-		fears: fears,
+		Name:  name,
+		Loves: loves,
+		Fears: fears,
 	}
 }
 
@@ -71,20 +72,28 @@ func getPlayerInfo(s *bufio.Scanner) ([3]string, error) {
 	var ans [3]string
 	fmt.Println("What is your name?")
 	fmt.Print("> ")
-	for s.Scan() {
+	if s.Scan() {
 		ans[0] = s.Text()
+	}
+
+	for {
 		switch count {
 		case 0:
 			fmt.Println("What is/are your greatest loves?")
 			fmt.Print("> ")
+			if s.Scan() {
+				ans[1] = s.Text()
+			}
 			count++
 		case 1:
 			fmt.Println("What is/are your greatest fears?")
 			fmt.Print("> ")
+			if s.Scan() {
+				ans[2] = s.Text()
+			}
 			count++
 		default:
 			return ans, nil
 		}
 	}
-	return [3]string{}, errors.New("this should never happen")
 }
