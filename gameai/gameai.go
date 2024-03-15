@@ -42,14 +42,6 @@ func (gai *GameAI) Chat(ctx context.Context, c *openai.Client, s *bufio.Scanner,
 	}
 
 	for s.Scan() {
-		// move to gameai package
-		// gameai type will save state
-		// field called state (unexported)
-		// expose state to user with a method called State()
-		// constants - exported, that represent state
-		// gameai.New() state will be chatting
-		// gai.Chat() state will be 'ending' 'chatting' ?
-		// if in 'ending' can't Chat() would hit error
 
 		req.Messages = append(req.Messages, openai.ChatCompletionMessage{
 			Role:    openai.ChatMessageRoleUser,
